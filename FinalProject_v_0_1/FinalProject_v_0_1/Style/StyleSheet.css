@@ -1,0 +1,9 @@
+﻿.login_button {
+    display:block;
+}
+.login_textbox {
+    display:block;
+    border:solid 2px gray;
+    margin:5px;
+    color:darkgray;
+}
