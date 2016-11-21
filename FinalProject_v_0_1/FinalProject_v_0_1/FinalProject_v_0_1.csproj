@@ -79,9 +79,14 @@
   <ItemGroup>
     <Content Include="Pages\Page_Home.aspx" />
     <Content Include="Pages\Page_Login.aspx" />
+    <Content Include="Pages\Page_Profile.aspx" />
     <Content Include="Pages\Page_Signup.aspx" />
     <Content Include="Script\FacebookLogin.js" />
     <Content Include="Script\JavaScript.js" />
+    <Content Include="src\icon_profile.png" />
+    <Content Include="src\icon_pickup.png" />
+    <Content Include="src\icon_viewposts.png" />
+    <Content Include="src\icon_message.png" />
     <Content Include="Style\StyleSheet.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -102,6 +107,13 @@
     </Compile>
     <Compile Include="Pages\Page_Login.aspx.designer.cs">
       <DependentUpon>Page_Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Page_Profile.aspx.cs">
+      <DependentUpon>Page_Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Page_Profile.aspx.designer.cs">
+      <DependentUpon>Page_Profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Page_Signup.aspx.cs">
       <DependentUpon>Page_Signup.aspx</DependentUpon>

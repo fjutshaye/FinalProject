@@ -29,7 +29,7 @@ namespace DatabaseTest1
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <param name="userId"></param>
-        public static void insertUser(string username, string password, int userId)
+        public static bool insertUser(string username, string password)
         {
             connection = new MySqlConnection(connectionString);
             try
@@ -38,15 +38,16 @@ namespace DatabaseTest1
                 Console.WriteLine("Database connected");
                 cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "INSERT INTO ACCOUNT(username,password,userId)VALUES(@username,@password,@userId)";
+                cmd.CommandText = "INSERT INTO ACCOUNT(username,password)VALUES(@username,@password)";
                 cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@password", password);
-                cmd.Parameters.AddWithValue("@userId", userId);
                 cmd.ExecuteNonQuery();
+                return true;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                return false;
             }
             finally
             {
@@ -93,6 +94,10 @@ namespace DatabaseTest1
                     Console.WriteLine("Database Disconnected");
                 }
             }
+        }
+        public static void insertProfile()
+        {
+
         }
     }
 }

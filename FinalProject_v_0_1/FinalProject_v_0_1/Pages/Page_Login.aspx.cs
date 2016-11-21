@@ -14,7 +14,9 @@ namespace FinalProject_v_0_1
                 DatabaseTools.setConnection("localhost", "root", "", "finalproject");
                 if (DatabaseTools.validateAccount(username, password))
                 {
-                    Response.Write("Login successfully");
+                    //Response.Write("Login successfully");
+                    Session["username"] = username;
+                    Response.Redirect("Page_Home.aspx");
                 }
                 else
                 {

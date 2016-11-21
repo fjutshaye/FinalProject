@@ -7,3 +7,24 @@
     margin:5px;
     color:darkgray;
 }
+.signUp_textbox {
+    border:solid 2px gray;
+    margin:5px;
+}
+.img_button {
+    border: 2px solid black;
+    border-radius: 10px;
+    width:120px;
+    text-align:center;
+    font-family:'Comic Sans MS';
+    margin: 2%;
+    padding:10px;
+    display:inline-block;
+}
+    .img_button:hover {
+        cursor:pointer;
+        background-color:lightsteelblue;
+    }
+a img {
+    width: 80%;
+}

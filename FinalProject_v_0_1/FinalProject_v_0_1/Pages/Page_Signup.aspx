@@ -9,9 +9,20 @@
     <script type="text/javascript" src="../Script/JavaScript.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="signUp_form" runat="server" method="post" action="Page_Signup.aspx">
     <div>
-        <input type="text" class />
+        <label>Valid Email Address:</label>
+        <input type="text" name="signUp_username" id="signUp_username" class="signUp_textbox" />
+        <label>This will be used as your username</label>
+        <br />
+        <label>Password:</label>
+        <input type="password" name="signUp_password" id="signUp_passwrod" class="signUp_textbox"/>
+        <br />
+        <label>Password Confirmation</label>
+        <input type="password" name="signUp_pwdConfirm" id="signUp_pwdConfirm" class="signUp_textbox" />
+        <br />
+        <input type="submit" name="Submit" value="Submit" />
+        <input type="reset" name="Reset" value="Reset" />
     </div>
     </form>
 </body>

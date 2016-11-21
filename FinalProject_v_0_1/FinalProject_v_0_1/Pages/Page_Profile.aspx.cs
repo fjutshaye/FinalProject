@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace FinalProject_v_0_1.Pages
 {
-    public partial class Page_Home : System.Web.UI.Page
+    public partial class Page_Profile : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            label_username.Text = (string)Session["username"];
+
         }
     }
 }
