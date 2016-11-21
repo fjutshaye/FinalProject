@@ -95,9 +95,34 @@ namespace DatabaseTest1
                 }
             }
         }
-        public static void insertProfile()
+        public static bool insertProfile(string email)
         {
-
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "INSERT INTO USER_PROFILE(email,name)VALUES(@email,@name)";
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@name", "New Comer");
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
         }
     }
 }

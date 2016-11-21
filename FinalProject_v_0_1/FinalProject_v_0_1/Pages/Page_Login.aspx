@@ -90,12 +90,12 @@
         }    </script>--%>
 
     <form id="login_form" method="post" runat="server" action="Page_Login.aspx">
-    <div>
+    <div class="login_div">
         <%--username must be an email address--%>
         <input type="text" class="login_textbox" name="username" id="username" placeholder="USERNAME" required="required"/>
         <input type="password" class="login_textbox" name="password" id="password" placeholder="PASSWORD" required="required"/>
         <input type="submit" class ="login_button" name="Login" value="Login" onclick="return checkInput()"/>
-        <asp:Label CssClass="loing_label" ID="Label_static1" runat="server" Text="Don't have an account ?"></asp:Label>
+        <asp:Label CssClass="login_label" ID="Label_static1" runat="server" Text="Don't have an account ?"></asp:Label>
         <asp:HyperLink CssClass="login_a" ID="Link_signup" runat="server" NavigateUrl="~/Pages/Page_Signup.aspx">Sign up</asp:HyperLink>
     </div>
     <!--

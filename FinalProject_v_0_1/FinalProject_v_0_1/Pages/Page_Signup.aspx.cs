@@ -17,7 +17,9 @@ namespace FinalProject_v_0_1.Pages
             if (username != null && password != null)
             {
                 DatabaseTools.setConnection("localhost", "root", "", "finalproject");
-                if (DatabaseTools.insertUser(username, password))
+                bool t1 = DatabaseTools.insertUser(username, password);
+                bool t2 = DatabaseTools.insertProfile(username);
+                if (t1&&t2)
                 {
                     Response.Redirect("Page_Login.aspx");
                 }

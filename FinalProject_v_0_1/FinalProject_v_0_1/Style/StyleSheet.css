@@ -1,15 +1,32 @@
 ﻿.login_button {
     display:block;
+    width:30%;
+    margin-left:35%;
 }
 .login_textbox {
     display:block;
-    border:solid 2px gray;
-    margin:5px;
-    color:darkgray;
+    border:solid 2px black;
+    margin-top:5px;
+    color:black;
+    /*margin-left:3%*/
+    width:100%;
+}
+.login_div {
+    margin-top:10%;
+    margin-left:40%;
+    margin-right:40%;
+}
+.signUp_button {
+    margin-top:5px;
 }
 .signUp_textbox {
-    border:solid 2px gray;
-    margin:5px;
+    border:solid 2px black;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+.signUp_div {
+    margin-top:10%;
+    margin-left:40%;
 }
 .img_button {
     border: 2px solid black;
