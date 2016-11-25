@@ -15,6 +15,7 @@
     margin-top:10%;
     margin-left:40%;
     margin-right:40%;
+    font-family:'Comic Sans MS';
 }
 .signUp_button {
     margin-top:5px;
@@ -27,6 +28,7 @@
 .signUp_div {
     margin-top:10%;
     margin-left:40%;
+    font-family:'Comic Sans MS';
 }
 .img_button {
     border: 2px solid black;
@@ -44,4 +46,13 @@
     }
 a img {
     width: 80%;
+}
+.profile_div{
+    text-align:right;
+    font-family:'Comic Sans MS';
+    display:inline;
+    float:left;
+    margin-left:20%;
+    padding-left:10px;
+    padding-right:10px;
 }
