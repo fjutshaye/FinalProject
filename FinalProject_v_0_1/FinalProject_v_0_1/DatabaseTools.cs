@@ -167,5 +167,36 @@ namespace DatabaseTest1
                 }
             }
         }
+        public static bool updateProfile(string username, string name, string phone, string carInfo)
+        {
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                //cmd.CommandText = "select * from user_profile where email=\'" + username + "\'";
+                //MySqlDataReader reader = cmd.ExecuteReader();
+                //return new string[1] { "succeeded" };
+                cmd.CommandText = "UPDATE user_profile SET name=\'"+name+"\',"+"phoneNumber=\'"+phone+"\',carInfo=\'"+carInfo
+                    +"\' WHERE email=\'"+username+"\';";
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
+        }
     }
 }

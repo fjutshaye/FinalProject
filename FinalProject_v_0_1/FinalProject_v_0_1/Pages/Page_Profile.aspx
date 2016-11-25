@@ -6,7 +6,6 @@
 <head runat="server">
     <title></title>
     <link type="text/css" rel="stylesheet" href="../Style/StyleSheet.css" />
-    <script type="text/javascript" src="../Script/script_profile.js"></script>
 </head>
 <body>
     <form id="profile_page" runat="server">
@@ -24,8 +23,8 @@
         <label>My Car Information:</label>
         <asp:TextBox CssClass="signUp_textbox" ID="TextBox_CarInfo" runat="server" ReadOnly="True"></asp:TextBox>
         <br />
-        <asp:Button CssClass="signUp_button" ID="Button_ChangeProfile" runat="server" Text="Change My Profile" OnClientClick="setTextBoxChangeable()" />
-        <asp:Button CssClass="signUp_button" ID="Button_SaveProfile" runat="server" Text="Save" Enabled="False" />
+        <asp:Button CssClass="signUp_button" ID="Button_ChangeProfile" runat="server" Text="Change My Profile" OnClick="Button_ChangeProfile_Click" />
+        <asp:Button CssClass="signUp_button" ID="Button_SaveProfile" runat="server" Text="Save" Enabled="False" OnClick="Button_SaveProfile_Click" />
     </div>
     <div class="profile_div">
         <h2>Post My Carpool</h2>
@@ -48,6 +47,8 @@
         <br />
         <label>More Description:</label>
         <asp:TextBox CssClass="signUp_textbox" ID="TextBox6" runat="server" TextMode="MultiLine"></asp:TextBox>
+        <br />
+        <asp:Button CssClass="signUp_button" ID="Button_ResetCarpool" runat="server" />
     </div>
     </form>
 </body>
