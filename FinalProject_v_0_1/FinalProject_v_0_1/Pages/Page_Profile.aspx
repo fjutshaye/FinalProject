@@ -29,26 +29,33 @@
     <div class="profile_div">
         <h2>Post My Carpool</h2>
         <label>Destination:</label>
-        <asp:TextBox CssClass="signUp_textbox" ID="TextBox5" runat="server"></asp:TextBox>
+        <asp:TextBox CssClass="signUp_textbox" ID="TextBox_Destination" runat="server"></asp:TextBox>
         <br />
         <label>Date & Time</label>
-        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList1" runat="server">
-        </asp:DropDownList>
-        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList2" runat="server">
-        </asp:DropDownList>
-        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList3" runat="server">
-        </asp:DropDownList>
+        <asp:Calendar ID="Calendar_Resource" runat="server"></asp:Calendar>
         <br />
         <label>Car Information:</label>
-        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList4" runat="server"></asp:DropDownList>
+        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList_CarInfo" runat="server">
+        </asp:DropDownList>
         <br />
         <label>Capacity</label>
-        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList5" runat="server"></asp:DropDownList>
+        <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList_Capacity" runat="server">
+            <asp:ListItem Selected="True">1</asp:ListItem>
+            <asp:ListItem>2</asp:ListItem>
+            <asp:ListItem>3</asp:ListItem>
+            <asp:ListItem>4</asp:ListItem>
+            <asp:ListItem>5</asp:ListItem>
+            <asp:ListItem Value="6"></asp:ListItem>
+            <asp:ListItem>7</asp:ListItem>
+            <asp:ListItem Value="0">7+</asp:ListItem>
+        </asp:DropDownList>
         <br />
         <label>More Description:</label>
-        <asp:TextBox CssClass="signUp_textbox" ID="TextBox6" runat="server" TextMode="MultiLine"></asp:TextBox>
+        <asp:TextBox CssClass="signUp_textbox" ID="TextBox_Description" runat="server" TextMode="MultiLine"></asp:TextBox>
         <br />
-        <asp:Button CssClass="signUp_button" ID="Button_ResetCarpool" runat="server" />
+        <asp:Button CssClass="signUp_button" ID="Button_PostCarpool" runat="server" text="Post My Carpool" OnClick="Button_PostCarpool_Click"/>
+        <br />
+        <asp:Label ID="Label_Feedback" runat="server"></asp:Label>
     </div>
     </form>
 </body>

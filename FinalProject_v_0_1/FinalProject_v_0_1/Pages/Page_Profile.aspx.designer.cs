@@ -76,75 +76,66 @@ namespace FinalProject_v_0_1.Pages {
         protected global::System.Web.UI.WebControls.Button Button_SaveProfile;
         
         /// <summary>
-        /// TextBox5 control.
+        /// TextBox_Destination control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox5;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Destination;
         
         /// <summary>
-        /// DropDownList1 control.
+        /// Calendar_Resource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.Calendar Calendar_Resource;
         
         /// <summary>
-        /// DropDownList2 control.
+        /// DropDownList_CarInfo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_CarInfo;
         
         /// <summary>
-        /// DropDownList3 control.
+        /// DropDownList_Capacity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList3;
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList_Capacity;
         
         /// <summary>
-        /// DropDownList4 control.
+        /// TextBox_Description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList4;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Description;
         
         /// <summary>
-        /// DropDownList5 control.
+        /// Button_PostCarpool control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList5;
+        protected global::System.Web.UI.WebControls.Button Button_PostCarpool;
         
         /// <summary>
-        /// TextBox6 control.
+        /// Label_Feedback control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox6;
-        
-        /// <summary>
-        /// Button_ResetCarpool control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_ResetCarpool;
+        protected global::System.Web.UI.WebControls.Label Label_Feedback;
     }
 }

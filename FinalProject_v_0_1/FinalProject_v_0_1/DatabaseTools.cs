@@ -198,5 +198,41 @@ namespace DatabaseTest1
                 }
             }
         }
+        public static bool insertCarpool(string carpoolId, string username, string destination, DateTime dateTime, string carInfo, int capacity, string description)
+        {
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText =
+                    "INSERT INTO carpool(carpoolId,username,destination,dateTime,carInfo,capacity,description)VALUES(@carpoolId,@username,@destination,@dateTime,@carInfo,@capacity,@description)";
+                cmd.Parameters.AddWithValue("@carpoolId", carpoolId);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@dateTime", dateTime);
+                cmd.Parameters.AddWithValue("@carInfo",carInfo);
+                cmd.Parameters.AddWithValue("@capacity", capacity);
+                cmd.Parameters.AddWithValue("@description", description);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
+
+        }
     }
 }
