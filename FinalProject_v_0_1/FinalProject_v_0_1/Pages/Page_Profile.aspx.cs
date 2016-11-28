@@ -1,5 +1,6 @@
 ﻿using DatabaseTest1;
 using System;
+using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
 
 namespace FinalProject_v_0_1.Pages
@@ -54,29 +55,69 @@ namespace FinalProject_v_0_1.Pages
 
         protected void Button_PostCarpool_Click(object sender, EventArgs e)
         {
-            DateTime dt = getCarpoolDate();
-            //Response.Write(dt.Date.ToString());
-            string carpoolId = generateCarpoolId();
-            bool temp = DatabaseTools.insertCarpool(carpoolId,username, TextBox_Destination.Text, dt, DropDownList_CarInfo.SelectedValue.ToString(),
-                int.Parse(DropDownList_Capacity.SelectedValue.ToString()), TextBox_Description.Text);
-            if (temp)
+            if (validation())
             {
-                Label_Feedback.Text = "Post Successfully. Your Carpool ID is "+carpoolId;
-            }else
-            {
-                Label_Feedback.Text = "Failed to Post";
+                
+                DateTime dt = getCarpoolDateTime();
+                if (dt.CompareTo(DateTime.Now) < 0)
+                {
+                    BulletedList_InfoFeedBack.Items.Add("Don't set date earlier than today.");
+                    return;
+                }
+                //Response.Write(dt.Date.ToString());
+                string carpoolId = generateCarpoolId();
+                bool temp = DatabaseTools.insertCarpool(carpoolId, username, TextBox_Destination.Text, dt, DropDownList_CarInfo.SelectedValue.ToString(),
+                    int.Parse(DropDownList_Capacity.SelectedValue.ToString()), TextBox_Description.Text);
+                if (temp)
+                {
+                    Label_Feedback.Text = "Post Successfully. Your Carpool ID is " + carpoolId;
+                }
+                else
+                {
+                    Label_Feedback.Text = "Failed to Post";
+                }
             }
         }
 
-        private DateTime getCarpoolDate()
+        private DateTime getCarpoolDateTime()
         {
-            return Calendar_Resource.SelectedDate;
+            DateTime dt = Calendar_Resource.SelectedDate;
+            int hour = int.Parse(TextBox_Hour.Text);
+            int min = int.Parse(TextBox_Minute.Text);
+            if (DropDownList_AmPm.SelectedValue.Equals("pm"))
+            {
+                hour += 12;
+                if (hour >= 24)
+                    hour = 0;
+            }
+            return dt.AddHours(hour).AddMinutes(min);
         }
         private string generateCarpoolId()
         {
             Guid g = new Guid();
             g = Guid.NewGuid();
             return g.ToString();
+        }
+        private bool validation()
+        {
+            BulletedList_InfoFeedBack.Items.Clear();
+
+            if (!ValidationTools.chequeDestination(TextBox_Destination.Text))
+            {
+                BulletedList_InfoFeedBack.Items.Add("Invalid Destination");
+                return false;
+            }
+            if(!ValidationTools.chequeTime(TextBox_Hour.Text, TextBox_Minute.Text))
+            {
+                BulletedList_InfoFeedBack.Items.Add("Invalid Time");
+                return false;
+            }
+            if (!ValidationTools.chequeDescription(TextBox_Description.Text))
+            {
+                BulletedList_InfoFeedBack.Items.Add("Invalid Time");
+                return false;
+            }
+            return true;
         }
     }
 }
