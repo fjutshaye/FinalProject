@@ -58,3 +58,19 @@ a img {
     display:inline;
     width:50%;
 }
+.nav_div{
+    font-family: 'Comic Sans MS';
+    font-size:x-large;
+    background-color:lightgray;
+}
+.nav_ul{
+    list-style: none;
+    margin-left:20%;
+}
+.nav_li{
+    display:inline-block;
+    margin-left: 8%;
+}
+.nav_li:hover{
+    background-color:moccasin;
+}

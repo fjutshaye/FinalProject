@@ -12,6 +12,7 @@ namespace FinalProject_v_0_1.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             username = (string)Session["username"];
+            Label_Username.Text = username;
 
             if (!IsPostBack)
             {

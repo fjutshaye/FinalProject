@@ -83,6 +83,7 @@
     <Content Include="Pages\Page_Signup.aspx" />
     <Content Include="Script\FacebookLogin.js" />
     <Content Include="Script\JavaScript.js" />
+    <Content Include="Script\PagesLoad.js" />
     <Content Include="Script\script_profile.js" />
     <Content Include="Script\script_signUp.js" />
     <Content Include="src\icon_profile.png" />
