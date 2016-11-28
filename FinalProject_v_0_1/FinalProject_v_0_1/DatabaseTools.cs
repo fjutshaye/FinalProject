@@ -95,8 +95,143 @@ namespace DatabaseTest1
                 }
             }
         }
-        public static void insertProfile()
+        public static bool insertProfile(string email)
         {
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "INSERT INTO USER_PROFILE(email,name)VALUES(@email,@name)";
+                cmd.Parameters.AddWithValue("@email", email);
+                cmd.Parameters.AddWithValue("@name", "New Comer");
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
+        }
+        public static object[] queryProfile(string username)
+        {
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "select * from user_profile where email=\'" + username + "\'";
+                MySqlDataReader reader = cmd.ExecuteReader();
+                //return new string[1] { "succeeded" };
+                object[] result = new object[5];
+                if (reader.Read())
+                {
+                    for(int i = 0; i < 5; i++)
+                    {
+                        object temp = reader.GetValue(i);
+                        if(temp == null)
+                        {
+                            result[i] = "Null";
+                        }else
+                        {
+                            result[i] = temp;
+                        }
+                    }
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return new string[1] { "failed" };
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
+        }
+        public static bool updateProfile(string username, string name, string phone, string carInfo)
+        {
+            connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                //cmd.CommandText = "select * from user_profile where email=\'" + username + "\'";
+                //MySqlDataReader reader = cmd.ExecuteReader();
+                //return new string[1] { "succeeded" };
+                cmd.CommandText = "UPDATE user_profile SET name=\'"+name+"\',"+"phoneNumber=\'"+phone+"\',carInfo=\'"+carInfo
+                    +"\' WHERE email=\'"+username+"\';";
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
+        }
+        public static bool insertCarpool(string carpoolId, string username, string destination, DateTime dateTime, string carInfo, int capacity, string description)
+        {
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText =
+                    "INSERT INTO carpool(carpoolId,username,destination,dateTime,carInfo,capacity,description)VALUES(@carpoolId,@username,@destination,@dateTime,@carInfo,@capacity,@description)";
+                cmd.Parameters.AddWithValue("@carpoolId", carpoolId);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@dateTime", dateTime);
+                cmd.Parameters.AddWithValue("@carInfo",carInfo);
+                cmd.Parameters.AddWithValue("@capacity", capacity);
+                cmd.Parameters.AddWithValue("@description", description);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
 
         }
     }
