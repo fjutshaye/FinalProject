@@ -8,7 +8,7 @@ namespace FinalProject_v_0_1.Pages
     public partial class Page_Profile : System.Web.UI.Page
     {
         private string username;
-        private object[] userProfile = new object[5];
+        private object[] userProfile = new object[6];
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,12 +20,12 @@ namespace FinalProject_v_0_1.Pages
                 userProfile = DatabaseTools.queryProfile(username);
                 if (!userProfile[4].Equals(null))
                 {
-                    DropDownList_CarInfo.Items.Add(new ListItem(userProfile[4].ToString()));
+                    DropDownList_CarInfo.Items.Add(new ListItem(userProfile[5].ToString()));
                 }
-                TextBox_Name.Text = userProfile[1].ToString();
-                TextBox_Phone.Text = userProfile[2].ToString();
-                TextBox_Email.Text = userProfile[0].ToString();
-                TextBox_CarInfo.Text = userProfile[4].ToString();
+                TextBox_Name.Text = userProfile[2].ToString();
+                TextBox_Phone.Text = userProfile[3].ToString();
+                TextBox_Email.Text = userProfile[1].ToString();
+                TextBox_CarInfo.Text = userProfile[5].ToString();
             }
         }
 
@@ -34,6 +34,7 @@ namespace FinalProject_v_0_1.Pages
             TextBox_Name.ReadOnly = false;
             TextBox_Phone.ReadOnly = false;
             TextBox_CarInfo.ReadOnly = false;
+            TextBox_Email.ReadOnly = false;
             Button_SaveProfile.Enabled = true;
         }
 
@@ -42,9 +43,11 @@ namespace FinalProject_v_0_1.Pages
             TextBox_Name.ReadOnly = true;
             TextBox_Phone.ReadOnly = true;
             TextBox_CarInfo.ReadOnly = true;
+            TextBox_Email.ReadOnly = true;
             Button_SaveProfile.Enabled = false;
 
-            DatabaseTools.updateProfile((string)Session["username"], TextBox_Name.Text, TextBox_Phone.Text, TextBox_CarInfo.Text);
+            DatabaseTools.updateProfile((string)Session["username"], 
+                TextBox_Email.Text,TextBox_Name.Text, TextBox_Phone.Text, TextBox_CarInfo.Text);
 
             userProfile = DatabaseTools.queryProfile(username);
             if (!userProfile[4].Equals(null))
@@ -57,7 +60,6 @@ namespace FinalProject_v_0_1.Pages
         {
             if (validation())
             {
-                
                 DateTime dt = getCarpoolDateTime();
                 if (dt.CompareTo(DateTime.Now) < 0)
                 {
@@ -92,12 +94,17 @@ namespace FinalProject_v_0_1.Pages
             }
             return dt.AddHours(hour).AddMinutes(min);
         }
+
         private string generateCarpoolId()
         {
             Guid g = new Guid();
             g = Guid.NewGuid();
-            return g.ToString();
+            return g.ToString() + "/000";
         }
+        /// <summary>
+        /// validate the input of Carool
+        /// </summary>
+        /// <returns>true: valid input | false: invalid input</returns>
         private bool validation()
         {
             BulletedList_InfoFeedBack.Items.Clear();
@@ -114,7 +121,7 @@ namespace FinalProject_v_0_1.Pages
             }
             if (!ValidationTools.chequeDescription(TextBox_Description.Text))
             {
-                BulletedList_InfoFeedBack.Items.Add("Invalid Time");
+                BulletedList_InfoFeedBack.Items.Add("Invalid Description");
                 return false;
             }
             return true;

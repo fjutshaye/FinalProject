@@ -19,18 +19,12 @@ namespace DatabaseTest1
 
         public static void setConnection(string server, string username, string pwd, string database)
         {
-            connectionString = "server="+server+";user id="+username+";database="+database+";";
+            connectionString = "server="+server+";user id="+username+";pwd="+pwd+";database="+database+";";
             //DatabaseTools.database = database;
         }
-
-        /// <summary>
-        /// This method creates an account in the table "account".
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
-        /// <param name="userId"></param>
-        public static bool insertUser(string username, string password)
+        public static bool singUptUser(string host, string username, string password)
         {
+            setConnection("localhost", "admin", "12345678", "finalproject");
             connection = new MySqlConnection(connectionString);
             try
             {
@@ -38,9 +32,18 @@ namespace DatabaseTest1
                 Console.WriteLine("Database connected");
                 cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "INSERT INTO ACCOUNT(username,password)VALUES(@username,@password)";
-                cmd.Parameters.AddWithValue("@username", username);
+                //create user
+                cmd.CommandText = "INSERT INTO mysql.user (Host, User, Password) VALUES( @Host, @User, password(@Password))";
+                cmd.Parameters.AddWithValue("@Host", host);
+                cmd.Parameters.AddWithValue("@User", username);
                 cmd.Parameters.AddWithValue("@password", password);
+                //cmd.Parameters.AddWithValue("@Select_priv", "Y");
+                cmd.ExecuteNonQuery();
+                //grant
+                cmd.CommandText = "GRANT SELECT, UPDATE ON finalproject.* TO '"+username+"'@'"+host+"' identified by '" + password + "'";
+                cmd.ExecuteNonQuery();
+                //flush
+                cmd.CommandText = "flush privileges";
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -60,26 +63,13 @@ namespace DatabaseTest1
         }
         public static bool validateAccount(string username, string pwd)
         {
+            setConnection("localhost", username, pwd, "finalproject");
             connection = new MySqlConnection(connectionString);
             try
             {
                 connection.Open();
                 Console.WriteLine("Database connected");
-                cmd = connection.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from account where username=\'"+username+"\' and password=\'"+pwd+"\'";
-                //int result = cmd.ExecuteNonQuery();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    Console.WriteLine("valid username and password");
-                    return true;
-                }
-                else
-                {
-                    Console.WriteLine("invalid username or password");
-                    return false;
-                }
+                return true;
             }
             catch (Exception ex)
             {
@@ -95,8 +85,9 @@ namespace DatabaseTest1
                 }
             }
         }
-        public static bool insertProfile(string email)
+        public static bool insertProfile(string username)
         {
+            setConnection("localhost", "admin", "12345678", "finalproject");
             connection = new MySqlConnection(connectionString);
             try
             {
@@ -104,8 +95,8 @@ namespace DatabaseTest1
                 Console.WriteLine("Database connected");
                 cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "INSERT INTO USER_PROFILE(email,name)VALUES(@email,@name)";
-                cmd.Parameters.AddWithValue("@email", email);
+                cmd.CommandText = "INSERT INTO USER_PROFILE(username,name)VALUES(@username,@name)";
+                cmd.Parameters.AddWithValue("@username", username);
                 cmd.Parameters.AddWithValue("@name", "New Comer");
                 cmd.ExecuteNonQuery();
                 return true;
@@ -133,22 +124,23 @@ namespace DatabaseTest1
                 Console.WriteLine("Database connected");
                 cmd = connection.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "select * from user_profile where email=\'" + username + "\'";
+                cmd.CommandText = "select * from user_profile where username=\'" + username + "\'";
                 MySqlDataReader reader = cmd.ExecuteReader();
                 //return new string[1] { "succeeded" };
-                object[] result = new object[5];
+                object[] result = new object[6];
                 if (reader.Read())
                 {
-                    for(int i = 0; i < 5; i++)
+                    for(int i = 0; i < result.Length; i++)
                     {
                         object temp = reader.GetValue(i);
-                        if(temp == null)
-                        {
-                            result[i] = "Null";
-                        }else
-                        {
-                            result[i] = temp;
-                        }
+                        result[i] = temp;
+                        //if(temp == null)
+                        //{
+                        //    result[i] = "Null";
+                        //}else
+                        //{
+                        //    result[i] = temp;
+                        //}
                     }
                 }
                 return result;
@@ -167,7 +159,7 @@ namespace DatabaseTest1
                 }
             }
         }
-        public static bool updateProfile(string username, string name, string phone, string carInfo)
+        public static bool updateProfile(string username, string email, string name, string phone, string carInfo)
         {
             connection = new MySqlConnection(connectionString);
             try
@@ -179,8 +171,8 @@ namespace DatabaseTest1
                 //cmd.CommandText = "select * from user_profile where email=\'" + username + "\'";
                 //MySqlDataReader reader = cmd.ExecuteReader();
                 //return new string[1] { "succeeded" };
-                cmd.CommandText = "UPDATE user_profile SET name=\'"+name+"\',"+"phoneNumber=\'"+phone+"\',carInfo=\'"+carInfo
-                    +"\' WHERE email=\'"+username+"\';";
+                cmd.CommandText = "UPDATE user_profile SET email=\'"+email+"\',name=\'"+name+"\',phoneNumber=\'"+phone+"\',carInfo=\'"+carInfo
+                    +"\' WHERE username=\'"+username+"\';";
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -233,6 +225,40 @@ namespace DatabaseTest1
                 }
             }
 
+        }
+        public static bool insertRequest(string requestId, string username, string destination, DateTime dateTime, int numberOfPassenger, string description)
+        {
+            try
+            {
+                connection.Open();
+                Console.WriteLine("Database connected");
+                cmd = connection.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText =
+                    "INSERT INTO request(requestId,username,destination,dateTime,numberOfPassenger,description)VALUES(@requestId,@username,@destination,@dateTime,@numberOfPassenger,@description)";
+                cmd.Parameters.AddWithValue("@requestId", requestId);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@destination", destination);
+                cmd.Parameters.AddWithValue("@dateTime", dateTime);
+                cmd.Parameters.AddWithValue("@numberOfPassenger", numberOfPassenger);
+                cmd.Parameters.AddWithValue("@description", description);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                    Console.WriteLine("Database Disconnected");
+                }
+            }
         }
     }
 }

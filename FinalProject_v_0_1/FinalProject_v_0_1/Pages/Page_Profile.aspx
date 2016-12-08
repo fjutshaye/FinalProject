@@ -70,6 +70,8 @@
         <asp:Label ID="Label_Feedback" runat="server"></asp:Label>
         <asp:BulletedList ID="BulletedList_InfoFeedBack" runat="server" BulletStyle="Circle"></asp:BulletedList>
     </div>
+    <div style="clear:both;"></div><%-- Clear Float to fix the height of father tag--%>
     </form>
+    <script>includeFooter()</script>
 </body>
 </html>

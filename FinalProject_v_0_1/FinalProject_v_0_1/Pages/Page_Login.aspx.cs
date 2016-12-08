@@ -11,7 +11,7 @@ namespace FinalProject_v_0_1
             string password = Request.Form.Get("password");
             if (username != null && password != null)
             {
-                DatabaseTools.setConnection("localhost", "root", "", "finalproject");
+                //DatabaseTools.setConnection("localhost", username, password, "finalproject");
                 if (DatabaseTools.validateAccount(username, password))
                 {
                     //Response.Write("Login successfully");
