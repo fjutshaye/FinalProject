@@ -16,27 +16,28 @@ namespace FinalProject_v_0_1.Pages
             string password = Request.Form.Get("signUp_password");
             if (username != null && password != null)
             {
-                DatabaseTools.setConnection("localhost", "root", "", "finalproject");
-                bool t1 = DatabaseTools.insertUser(username, password);
-                bool t2 = DatabaseTools.insertProfile(username);
-                if (t1&&t2)
+                if (DatabaseTools.singUptUser("%", username, password))
                 {
-                    Response.Redirect("Page_Login.aspx");
+                    if (DatabaseTools.singUptUser("localhost", username, password))
+                    {
+                        if (DatabaseTools.insertProfile(username))
+                        {
+                            Response.Redirect("Page_Login.aspx");
+                        }
+                        else
+                        {
+                            Response.Write("<p>Error, failed to create account</p>");
+                        }
+                    }
+                    else
+                    {
+                        Response.Write("<p>Error, failed to create account</p>");
+                    }
                 }
                 else
                 {
                     Response.Write("<p>Error, failed to create account</p>");
                 }
-                //if (DatabaseTools.validateAccount(username, password))
-                //{
-                //    //Response.Write("Login successfully");
-                //    Session["username"] = username;
-                //    Response.Redirect("Page_Home.aspx");
-                //}
-                //else
-                //{
-                //    Response.Write("Login failed, please check your username and password.");
-                //}
             }
         }
     }

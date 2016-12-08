@@ -1,6 +1,5 @@
 ﻿var errInfo;
 var noErrFlag;
-var errDiv;
 function setTextBoxChangeable() {
     var name = document.getElementById("TextBox_Name");
     var phone = document.getElementById("TextBox_Phone");

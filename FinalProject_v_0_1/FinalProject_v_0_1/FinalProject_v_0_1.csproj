@@ -79,6 +79,7 @@
   <ItemGroup>
     <Content Include="Pages\Page_Home.aspx" />
     <Content Include="Pages\Page_Login.aspx" />
+    <Content Include="Pages\Page_PostRequest.aspx" />
     <Content Include="Pages\Page_Profile.aspx" />
     <Content Include="Pages\Page_Signup.aspx" />
     <Content Include="Script\FacebookLogin.js" />
@@ -111,6 +112,13 @@
     <Compile Include="Pages\Page_Login.aspx.designer.cs">
       <DependentUpon>Page_Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Page_PostRequest.aspx.cs">
+      <DependentUpon>Page_PostRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\Page_PostRequest.aspx.designer.cs">
+      <DependentUpon>Page_PostRequest.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Page_Profile.aspx.cs">
       <DependentUpon>Page_Profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -126,6 +134,7 @@
       <DependentUpon>Page_Signup.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationTools.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

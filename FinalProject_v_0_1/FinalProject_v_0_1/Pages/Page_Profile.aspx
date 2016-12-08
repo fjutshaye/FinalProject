@@ -34,8 +34,17 @@
         <label>Destination:</label>
         <asp:TextBox CssClass="signUp_textbox" ID="TextBox_Destination" runat="server"></asp:TextBox>
         <br />
-        <label>Date & Time</label>
+        <label>Date: </label>
         <asp:Calendar ID="Calendar_Resource" runat="server"></asp:Calendar>
+        <br />
+        <label>Time: </label>
+        <asp:TextBox ID="TextBox_Hour" runat="server" BorderStyle="Solid" TextMode="Time">12</asp:TextBox>
+        <label> : </label>
+        <asp:TextBox ID="TextBox_Minute" runat="server" BorderStyle="Solid">00</asp:TextBox>
+        <asp:DropDownList ID="DropDownList_AmPm" runat="server">
+            <asp:ListItem Selected="True">am</asp:ListItem>
+            <asp:ListItem>pm</asp:ListItem>
+        </asp:DropDownList>
         <br />
         <label>Car Information:</label>
         <asp:DropDownList CssClass="signUp_textbox" ID="DropDownList_CarInfo" runat="server">
@@ -59,7 +68,10 @@
         <asp:Button CssClass="signUp_button" ID="Button_PostCarpool" runat="server" text="Post My Carpool" OnClick="Button_PostCarpool_Click"/>
         <br />
         <asp:Label ID="Label_Feedback" runat="server"></asp:Label>
+        <asp:BulletedList ID="BulletedList_InfoFeedBack" runat="server" BulletStyle="Circle"></asp:BulletedList>
     </div>
+    <div style="clear:both;"></div><%-- Clear Float to fix the height of father tag--%>
     </form>
+    <script>includeFooter()</script>
 </body>
 </html>

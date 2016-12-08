@@ -11,8 +11,8 @@
 <body>
     <form id="signUp_form" runat="server" method="post" action="Page_Signup.aspx">
     <div class="signUp_div">
-        <input type="text" name="signUp_username" id="signUp_username" class="signUp_textbox" placeholder="Valid Email Address"/>
-        <label>This will be used as your username</label>
+        <input type="text" name="signUp_username" id="signUp_username" class="signUp_textbox" placeholder="Username"/>
+<%--        <label>This will be used as your username</label>--%>
         <br />
         <input type="password" name="signUp_password" id="signUp_passwrod" class="signUp_textbox" placeholder="Password"/>
         <br />
